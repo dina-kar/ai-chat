@@ -24,14 +24,14 @@ function PureSuggestedActions({
       action: 'What are the advantages of using Next.js?',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Search the web for',
+      label: 'Iran Israel War',
+      action: 'Search the web for Iran Israel War',
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: 'Generate an image of',
+      label: 'a futuristic city',
+      action: 'Generate an image of a futuristic city at sunset with flying cars',
     },
     {
       title: 'What is the weather',

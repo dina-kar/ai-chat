@@ -153,9 +153,9 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     return (
       <SidebarGroup>
         <SidebarGroupContent>
-          <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
-            No user session found. Please refresh the page.
-          </div>
+                      <div className="px-2 text-muted-foreground w-full flex flex-row justify-center items-center text-sm gap-2">
+              No user session found. Please refresh the page.
+            </div>
         </SidebarGroupContent>
       </SidebarGroup>
     );
@@ -194,7 +194,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     return (
       <SidebarGroup>
         <SidebarGroupContent>
-          <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
+          <div className="px-2 text-muted-foreground w-full flex flex-row justify-center items-center text-sm gap-2">
             Your conversations will appear here once you start chatting!
           </div>
         </SidebarGroupContent>
@@ -330,11 +330,11 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
           />
 
           {hasReachedEnd ? (
-            <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2 mt-8">
+            <div className="px-2 text-muted-foreground w-full flex flex-row justify-center items-center text-sm gap-2 mt-8">
               You have reached the end of your chat history.
             </div>
           ) : (
-            <div className="p-2 text-zinc-500 dark:text-zinc-400 flex flex-row gap-2 items-center mt-8">
+            <div className="p-2 text-muted-foreground flex flex-row gap-2 items-center mt-8">
               <div className="animate-spin">
                 <LoaderIcon />
               </div>

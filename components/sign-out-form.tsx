@@ -6,7 +6,7 @@ export const SignOutForm = () => {
     <Form action={signOutAction} className="w-full">
       <button
         type="submit"
-        className="w-full text-left px-1 py-0.5 text-red-500"
+        className="w-full text-left px-1 py-0.5 text-destructive"
       >
         Sign out
       </button>

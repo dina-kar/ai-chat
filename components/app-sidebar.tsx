@@ -26,35 +26,43 @@ export function AppSidebar({ user }: { user: User | undefined }) {
     <Sidebar className="group-data-[side=left]:border-r-0 glass-effect">
       <SidebarHeader className="border-b border-border/50 bg-gradient-to-r from-primary/5 to-accent/5">
         <SidebarMenu>
-          <div className="flex flex-row justify-between items-center">
-            <Link
-              href="/"
-              onClick={() => {
-                setOpenMobile(false);
-              }}
-              className="flex flex-row gap-3 items-center"
-            >
-              <span className="text-lg font-semibold px-2 hover:bg-primary/10 rounded-md cursor-pointer transition-colors duration-200 bg-gradient-to-r from-primary/80 to-accent/80 bg-clip-text">
-                 T3.Chat
-              </span>
-            </Link>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  type="button"
-                  className="p-2 h-fit hover:bg-primary/10 transition-colors duration-200"
-                  onClick={() => {
-                    setOpenMobile(false);
-                    router.push('/');
-                    router.refresh();
-                  }}
-                >
-                  <PlusIcon />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent align="end">New Chat</TooltipContent>
-            </Tooltip>
+          <div className="flex flex-col gap-3">
+            {/* ChatThing Title */}
+            <div className="flex flex-row justify-center items-center">
+              <Link
+                href="/"
+                onClick={() => {
+                  setOpenMobile(false);
+                }}
+                className="flex flex-row gap-3 items-center"
+              >
+                <span className="text-lg font-semibold px-2 hover:bg-primary/10 rounded-md cursor-pointer transition-colors duration-200 bg-gradient-to-r from-primary/80 to-accent/80 bg-clip-text">
+                   ChatThing
+                </span>
+              </Link>
+            </div>
+            
+            {/* Centered New Chat Button */}
+            <div className="flex flex-row justify-center items-center">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    type="button"
+                    className="w-full max-w-40 hover:bg-primary/10 transition-colors duration-200"
+                    onClick={() => {
+                      setOpenMobile(false);
+                      router.push('/');
+                      router.refresh();
+                    }}
+                  >
+                    <PlusIcon />
+                    <span className="ml-2">New Chat</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent align="center">Start a new conversation</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
         </SidebarMenu>
       </SidebarHeader>

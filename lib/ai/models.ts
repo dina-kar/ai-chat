@@ -67,18 +67,6 @@ export const chatModels: Array<ChatModel> = [
 
   // Gemini 1.5 Series - Proven and reliable
   {
-    id: 'gemini-1.5-pro',
-    name: 'Gemini 1.5 Pro',
-    description: 'Complex reasoning tasks requiring more intelligence',
-    family: 'gemini-1.5',
-    capabilities: {
-      multimodal: true,
-      thinking: false,
-      codeExecution: true,
-      functionCalling: true,
-    },
-  },
-  {
     id: 'gemini-1.5-flash',
     name: 'Gemini 1.5 Flash',
     description: 'Fast and versatile performance across diverse tasks',

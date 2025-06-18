@@ -23,6 +23,7 @@ import { createDocument } from '@/lib/ai/tools/create-document';
 import { updateDocument } from '@/lib/ai/tools/update-document';
 import { requestSuggestions } from '@/lib/ai/tools/request-suggestions';
 import { getWeather } from '@/lib/ai/tools/get-weather';
+import { webSearch } from '@/lib/ai/tools/web-search';
 import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
 import { entitlementsByUserType } from '@/lib/ai/entitlements';
@@ -40,7 +41,8 @@ export async function POST(request: Request) {
     try {
       const json = await request.json();
       requestBody = postRequestBodySchema.parse(json);
-    } catch (_) {
+    } catch (error) {
+      console.error('Schema validation error:', error);
       return new ChatSDKError('bad_request:api', 'Invalid request body').toResponse();
     }
 
@@ -147,6 +149,7 @@ export async function POST(request: Request) {
               ? []
               : [
                   'getWeather',
+                  'webSearch',
                   'createDocument',
                   'updateDocument',
                   'requestSuggestions',
@@ -155,6 +158,7 @@ export async function POST(request: Request) {
           experimental_generateMessageId: generateUUID,
           tools: {
             getWeather,
+            webSearch,
             createDocument: createDocument({ session, dataStream }),
             updateDocument: updateDocument({ session, dataStream }),
             requestSuggestions: requestSuggestions({
@@ -234,13 +238,18 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const chatId = searchParams.get('chatId');
 
-    if (!chatId) {
-      return new ChatSDKError('bad_request:api', 'Parameter chatId is required').toResponse();
-    }
-
     const session = await auth();
     if (!session?.user) {
       return new ChatSDKError('unauthorized:chat').toResponse();
+    }
+
+    // If no chatId is provided, this might be an experimental_resume call
+    // Return an empty response for such cases
+    if (!chatId) {
+      return new Response(JSON.stringify({ messages: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Get chat and check permissions

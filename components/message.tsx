@@ -166,11 +166,18 @@ const PurePreviewMessage = ({
                     <div
                       key={toolCallId}
                       className={cx({
-                        skeleton: ['getWeather'].includes(toolName),
+                        skeleton: ['getWeather', 'webSearch'].includes(toolName),
                       })}
                     >
                       {toolName === 'getWeather' ? (
                         <Weather />
+                      ) : toolName === 'webSearch' ? (
+                        <div className="flex items-center gap-2 p-4 bg-muted rounded-lg">
+                          <div className="animate-spin h-4 w-4 border-2 border-primary border-t-transparent rounded-full" />
+                          <span className="text-sm text-muted-foreground">
+                            Searching the web for "{args.query}"...
+                          </span>
+                        </div>
                       ) : toolName === 'createDocument' ? (
                         <DocumentPreview isReadonly={isReadonly} args={args} />
                       ) : toolName === 'updateDocument' ? (
@@ -197,6 +204,91 @@ const PurePreviewMessage = ({
                     <div key={toolCallId}>
                       {toolName === 'getWeather' ? (
                         <Weather weatherAtLocation={result} />
+                      ) : toolName === 'webSearch' ? (
+                        <div className="bg-card border rounded-lg p-4 space-y-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-muted-foreground">🔍 Web Search Results</span>
+                          </div>
+                          
+                          {result.error ? (
+                            <div className="text-sm text-muted-foreground">
+                              {result.message}
+                            </div>
+                          ) : (
+                            <div className="space-y-3">
+                              {result.abstract && (
+                                <div>
+                                  <p className="text-sm">{result.abstract}</p>
+                                  {result.abstractSource && (
+                                    <p className="text-xs text-muted-foreground mt-1">
+                                      Source: {result.abstractSource}
+                                      {result.abstractURL && (
+                                        <a 
+                                          href={result.abstractURL} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer"
+                                          className="ml-1 underline hover:text-primary"
+                                        >
+                                          Read more
+                                        </a>
+                                      )}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                              
+                              {result.answer && (
+                                <div className="bg-primary/10 p-3 rounded border-l-4 border-primary">
+                                  <p className="text-sm font-medium">{result.answer}</p>
+                                </div>
+                              )}
+                              
+                              {result.definition && (
+                                <div>
+                                  <p className="text-sm"><strong>Definition:</strong> {result.definition}</p>
+                                  {result.definitionSource && (
+                                    <p className="text-xs text-muted-foreground mt-1">
+                                      Source: {result.definitionSource}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                              
+                              {result.results && result.results.length > 0 && (
+                                <div>
+                                  <p className="text-sm font-medium mb-2">Related results:</p>
+                                  <ul className="space-y-1">
+                                    {result.results.map((item: any, index: number) => (
+                                      <li key={index} className="text-sm">
+                                        <a 
+                                          href={item.FirstURL} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer"
+                                          className="text-primary hover:underline"
+                                        >
+                                          {item.Text}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                              
+                              {result.message && (
+                                <div className="text-sm text-muted-foreground">
+                                  {result.message}
+                                  {result.suggestions && (
+                                    <ul className="mt-2 list-disc list-inside space-y-1">
+                                      {result.suggestions.map((suggestion: string, index: number) => (
+                                        <li key={index} className="text-xs">{suggestion}</li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       ) : toolName === 'createDocument' ? (
                         <DocumentPreview
                           isReadonly={isReadonly}

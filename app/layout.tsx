@@ -7,7 +7,7 @@ import './globals.css';
 
 
 export const metadata: Metadata = {
-  title: 'T3 Chat',
+  title: 'ChatThing',
   description: 'The best AI Assistant and ChatGPT alternative',
 };
 
