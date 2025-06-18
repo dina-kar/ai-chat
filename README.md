@@ -2,7 +2,8 @@
 
 A modern AI chat application built with Next.js, Appwrite and Vercel ChatSDK 3.0
 
-<a href="ai-chat-lime-beta.vercel.app"><strong>App Link</strong></a>
+Here is the App Link
+<a href="https://ai-chat-lime-beta.vercel.app/"><strong>App Link</strong></a>
 
 <p align="center">
   <a href="https://cloneathon.t3.chat/"><strong>🏆 T3 Cloneathon</strong></a> ·
