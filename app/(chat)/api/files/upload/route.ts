@@ -67,8 +67,8 @@ export async function POST(request: Request) {
 
       // Return file information compatible with existing code
       const data = {
-        url: `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${result.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`,
-        downloadUrl: `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${result.$id}/download?project=${process.env.APPWRITE_PROJECT_ID}`,
+        url: `/api/files/${result.$id}`,
+        downloadUrl: `/api/files/${result.$id}`,
         pathname: filename,
         contentType: file.type,
         contentDisposition: `attachment; filename="${filename}"`,

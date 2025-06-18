@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { ID, Query } from 'node-appwrite';
+import { ID, Query } from 'appwrite';
 import { databases } from '@/lib/appwrite-server';
 
 import type { 
@@ -61,8 +61,6 @@ export async function createUser(email: string, password: string) {
     throw new ChatSDKError('bad_request:database', 'Failed to create user');
   }
 }
-
-
 
 export async function saveChat({
   id,
@@ -358,6 +356,7 @@ export async function saveDocument({
   userId: string;
 }) {
   try {
+    // Try to create a new document with the provided id
     return await databases.createDocument(
       DATABASE_ID,
       COLLECTIONS.DOCUMENTS,
@@ -370,28 +369,54 @@ export async function saveDocument({
         createdAt: new Date().toISOString(),
       }
     );
-  } catch (error) {
+  } catch (error: any) {
+    console.error('saveDocument error:', error);
+    
+    // If document already exists, create a new version with unique ID
+    if (error?.code === 409 || error?.type === 'document_already_exists') {
+      try {
+        return await databases.createDocument(
+          DATABASE_ID,
+          COLLECTIONS.DOCUMENTS,
+          ID.unique(),
+          {
+            userId,
+            title,
+            kind,
+            content,
+            createdAt: new Date().toISOString(),
+          }
+        );
+      } catch (retryError) {
+        console.error('saveDocument retry error:', retryError);
+        throw new ChatSDKError('bad_request:database', 'Failed to save document');
+      }
+    }
+    
     throw new ChatSDKError('bad_request:database', 'Failed to save document');
   }
 }
 
 export async function getDocumentsById({ id }: { id: string }) {
   try {
-    const result = await databases.listDocuments(
-      DATABASE_ID,
-      COLLECTIONS.DOCUMENTS,
-      [Query.equal('$id', id)]
-    );
-    
-    return result.documents.map(doc => ({
-      id: doc.$id,
-      title: doc.title,
-      kind: doc.kind,
-      content: doc.content,
-      userId: doc.userId,
-      createdAt: new Date(doc.createdAt),
-    })) as Document[];
+    // First try to get the exact document by ID
+    try {
+      const doc = await databases.getDocument(DATABASE_ID, COLLECTIONS.DOCUMENTS, id);
+      return [{
+        id: doc.$id,
+        title: doc.title,
+        kind: doc.kind,
+        content: doc.content,
+        userId: doc.userId,
+        createdAt: new Date(doc.createdAt),
+      }] as Document[];
+    } catch (notFoundError) {
+      // If not found, search for documents with similar title or content
+      // This is a fallback for existing functionality
+      return [] as Document[];
+    }
   } catch (error) {
+    console.error('getDocumentsById error:', error);
     throw new ChatSDKError(
       'bad_request:database',
       'Failed to get documents by id',

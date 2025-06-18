@@ -23,8 +23,8 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const { setOpenMobile } = useSidebar();
 
   return (
-    <Sidebar className="group-data-[side=left]:border-r-0">
-      <SidebarHeader>
+    <Sidebar className="group-data-[side=left]:border-r-0 glass-effect">
+      <SidebarHeader className="border-b border-border/50 bg-gradient-to-r from-primary/5 to-accent/5">
         <SidebarMenu>
           <div className="flex flex-row justify-between items-center">
             <Link
@@ -34,8 +34,8 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-lg font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
-                Chatbot
+              <span className="text-lg font-semibold px-2 hover:bg-primary/10 rounded-md cursor-pointer transition-colors duration-200 bg-gradient-to-r from-primary/80 to-accent/80 bg-clip-text text-transparent">
+                ✨ AI Chat
               </span>
             </Link>
             <Tooltip>
@@ -43,7 +43,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 <Button
                   variant="ghost"
                   type="button"
-                  className="p-2 h-fit"
+                  className="p-2 h-fit hover:bg-primary/10 transition-colors duration-200"
                   onClick={() => {
                     setOpenMobile(false);
                     router.push('/');
@@ -58,10 +58,12 @@ export function AppSidebar({ user }: { user: User | undefined }) {
           </div>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-gradient-to-b from-transparent to-muted/20">
         <SidebarHistory user={user} />
       </SidebarContent>
-      <SidebarFooter>{user && <SidebarUserNav user={user} />}</SidebarFooter>
+      <SidebarFooter className="border-t border-border/50 bg-gradient-to-r from-primary/5 to-accent/5">
+        {user && <SidebarUserNav user={user} />}
+      </SidebarFooter>
     </Sidebar>
   );
 }

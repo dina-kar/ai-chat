@@ -72,6 +72,42 @@ const config: Config = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        // Custom purple palette colors
+        magnolia: {
+          DEFAULT: '#FAEFFB',
+          2: '#FAF4FA', 
+          3: '#F9F3F9',
+        },
+        'chinese-violet': {
+          DEFAULT: '#726176',
+          light: '#8B7A8F',
+          dark: '#5A4D5E',
+        },
+        'pale-purple': {
+          DEFAULT: '#FAE2FC',
+          light: '#FCF0FD',
+          dark: '#F7D1FA',
+        },
+        'complement': '#A23B67',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+        'shimmer': 'shimmer 2s infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
       },
     },
   },

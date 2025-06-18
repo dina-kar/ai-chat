@@ -101,10 +101,15 @@ export default function Page() {
 
   return (
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12">
-        <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
-          <h3 className="text-xl font-semibold dark:text-zinc-50">Sign In</h3>
-          <p className="text-sm text-gray-500 dark:text-zinc-400">
+      <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-12 glass-effect p-8 mx-4">
+        <div className="flex flex-col items-center justify-center gap-4 px-4 text-center sm:px-16">
+          <div className="size-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-2">
+            <span className="text-2xl">✨</span>
+          </div>
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Welcome Back
+          </h3>
+          <p className="text-sm text-muted-foreground">
             {showOTP ? 'Enter the OTP sent to your email' : 'Enter your email to receive an OTP'}
           </p>
         </div>
@@ -113,13 +118,13 @@ export default function Page() {
           <AuthForm action={handleEmailSubmit} defaultEmail={email}>
             <div>
               <label
-                className="mb-3 mt-5 block text-xs font-medium text-gray-900 dark:text-zinc-200"
+                className="mb-3 mt-5 block text-sm font-medium text-foreground"
                 htmlFor="email"
               >
-                Email
+                Email Address
               </label>
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] px-3 text-sm outline-2 placeholder:text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                className="peer block w-full rounded-lg border border-border bg-card/50 backdrop-blur-sm py-3 px-4 text-sm outline-none placeholder:text-muted-foreground focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 placeholder="Enter your email"
                 type="email"
                 id="email"
@@ -133,18 +138,18 @@ export default function Page() {
         ) : (
           <AuthForm action={handleOTPSubmit} defaultEmail="">
             <div className="mb-4">
-              <p className="text-sm text-gray-600 dark:text-zinc-400 mb-3">
-                OTP sent to: <span className="font-medium">{email}</span>
+              <p className="text-sm text-muted-foreground mb-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                OTP sent to: <span className="font-medium text-primary">{email}</span>
               </p>
               <label
-                className="mb-3 block text-xs font-medium text-gray-900 dark:text-zinc-200"
+                className="mb-3 block text-sm font-medium text-foreground"
                 htmlFor="otp"
               >
                 OTP Code
               </label>
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] px-3 text-sm outline-2 placeholder:text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-                placeholder="Enter 6-digit OTP"
+                className="peer block w-full rounded-lg border border-border bg-card/50 backdrop-blur-sm py-3 px-4 outline-none placeholder:text-muted-foreground focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-center text-lg tracking-widest"
+                placeholder="000000"
                 type="text"
                 id="otp"
                 name="otp"
@@ -160,18 +165,18 @@ export default function Page() {
                 setShowOTP(false);
                 setOtp('');
               }}
-              className="text-sm text-gray-600 dark:text-zinc-400 hover:underline mt-2"
+              className="text-sm text-muted-foreground hover:text-primary hover:underline mt-4 transition-colors duration-200"
             >
               ← Back to email
             </button>
           </AuthForm>
         )}
 
-        <div className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
+        <div className="text-center text-sm text-muted-foreground mt-4">
           {"Don't have an account? "}
           <Link
             href="/register"
-            className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
+            className="font-semibold text-primary hover:text-accent hover:underline transition-colors duration-200"
           >
             Sign up
           </Link>

@@ -126,8 +126,10 @@ const PurePreviewMessage = ({
                       <div
                         data-testid="message-content"
                         className={cn('flex flex-col gap-4', {
-                          'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
+                          'bg-gradient-to-br from-primary/90 to-primary text-primary-foreground px-4 py-3 rounded-xl shadow-sm border border-primary/20':
                             message.role === 'user',
+                          'bg-card/50 backdrop-blur-sm px-4 py-3 rounded-xl border border-border/50':
+                            message.role === 'assistant',
                         })}
                       >
                         <Markdown>{sanitizeText(part.text)}</Markdown>

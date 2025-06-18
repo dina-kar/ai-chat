@@ -6,6 +6,8 @@ import { generateUUID } from '@/lib/utils';
 import { DataStreamHandler } from '@/components/data-stream-handler';
 import { auth } from '@/lib/auth-server';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const session = await auth();
 

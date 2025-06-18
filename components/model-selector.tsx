@@ -55,14 +55,15 @@ export function ModelSelector({
       >
         <Button
           data-testid="model-selector"
-          variant="outline"
-          className="md:px-2 md:h-[34px]"
+          variant="ghost"
+          size="sm"
+          className="h-8 px-2 text-xs hover:bg-primary/10 transition-colors duration-200"
         >
-          {selectedChatModel?.name}
-          <ChevronDownIcon />
+          <span className="max-w-[120px] truncate">{selectedChatModel?.name}</span>
+          <ChevronDownIcon size={12} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="min-w-[300px]">
+      <DropdownMenuContent align="start" className="min-w-[180px]">
         {availableChatModels.map((chatModel) => {
           const { id } = chatModel;
 
@@ -79,23 +80,12 @@ export function ModelSelector({
                 });
               }}
               data-active={id === optimisticModelId}
-              asChild
+              className="flex items-center justify-between cursor-pointer py-2"
             >
-              <button
-                type="button"
-                className="gap-4 group/item flex flex-row justify-between items-center w-full"
-              >
-                <div className="flex flex-col gap-1 items-start">
-                  <div>{chatModel.name}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {chatModel.description}
-                  </div>
-                </div>
-
-                <div className="text-foreground dark:text-foreground opacity-0 group-data-[active=true]/item:opacity-100">
-                  <CheckCircleFillIcon />
-                </div>
-              </button>
+              <span className="text-sm">{chatModel.name}</span>
+              {id === optimisticModelId && (
+                <CheckCircleFillIcon size={14} />
+              )}
             </DropdownMenuItem>
           );
         })}
