@@ -173,7 +173,7 @@ const PurePreviewMessage = ({
                         <Weather />
                       ) : toolName === 'webSearch' ? (
                         <div className="flex items-center gap-2 p-4 bg-muted rounded-lg">
-                          <div className="animate-spin h-4 w-4 border-2 border-primary border-t-transparent rounded-full" />
+                          <div className="animate-spin size-4 border-2 border-primary border-t-transparent rounded-full" />
                           <span className="text-sm text-muted-foreground">
                             Searching the web for "{args.query}"...
                           </span>

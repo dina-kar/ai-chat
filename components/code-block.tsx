@@ -54,7 +54,7 @@ export function CodeBlock({
           <Button
             variant="ghost"
             size="sm"
-            className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="size-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={copyToClipboard}
           >
             <CopyIcon size={12} />
