@@ -34,8 +34,8 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-lg font-semibold px-2 hover:bg-primary/10 rounded-md cursor-pointer transition-colors duration-200 bg-gradient-to-r from-primary/80 to-accent/80 bg-clip-text text-transparent">
-                ✨ AI Chat
+              <span className="text-lg font-semibold px-2 hover:bg-primary/10 rounded-md cursor-pointer transition-colors duration-200 bg-gradient-to-r from-primary/80 to-accent/80 bg-clip-text">
+                 T3.Chat
               </span>
             </Link>
             <Tooltip>

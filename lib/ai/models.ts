@@ -14,19 +14,6 @@ export interface ChatModel {
 }
 
 export const chatModels: Array<ChatModel> = [
-  // Gemini 2.5 Series - Latest and most advanced
-  {
-    id: 'gemini-2.5-pro',
-    name: 'Gemini 2.5 Pro',
-    description: 'Most powerful thinking model with maximum response accuracy',
-    family: 'gemini-2.5',
-    capabilities: {
-      multimodal: true,
-      thinking: true,
-      codeExecution: true,
-      functionCalling: true,
-    },
-  },
   {
     id: 'gemini-2.5-flash',
     name: 'Gemini 2.5 Flash',
